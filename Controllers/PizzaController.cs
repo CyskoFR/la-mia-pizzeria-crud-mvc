@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using la_mia_pizzeria.Models;
 
 namespace la_mia_pizzeria.Controllers
 {
     public class PizzaController : Controller
     {
+        PizzeriaContext context = new PizzeriaContext();
         public ActionResult Index()
         {
             PizzeriaContext db = new PizzeriaContext();
@@ -47,40 +47,45 @@ namespace la_mia_pizzeria.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View();
+            PizzeriaContext db = new PizzeriaContext();
+
+            return View(db.Pizzas.Find(id));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Pizza formData)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (!ModelState.IsValid)
             {
                 return View();
             }
+
+            Pizza pizzaEdit = context.Pizzas.Where(pizza => pizza.Id == id).First();
+
+            pizzaEdit.Name = formData.Name;
+            pizzaEdit.Description = formData.Description;
+            pizzaEdit.Picture = formData.Picture;
+            pizzaEdit.Price = formData.Price;
+
+            context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            return View();
-        }
+            Pizza pizzaEdit = context.Pizzas.Where(pizza => pizza.Id == id).First();
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            context.Pizzas.Remove(pizzaEdit);
+            context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

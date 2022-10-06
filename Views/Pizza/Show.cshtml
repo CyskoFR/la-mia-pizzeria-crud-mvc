@@ -26,4 +26,12 @@
     <a class="btn btn-secondary my-2" href="@Url.Action("Index", "Pizza")">
         Torna Indietro
     </a>
+    <a class="btn btn-warning my-2" href="@Url.Action("Edit", "Pizza", new{id = Model.Id})">
+        Modifica
+    </a>
+    <form class="d-inline" asp-controller="Pizza" asp-route-id="@Model.Id" asp-action="Delete" method="post">
+        <button type="submit" class="btn btn-danger my-2">
+            Elimina
+        </button>
+    </form>
 </body>
