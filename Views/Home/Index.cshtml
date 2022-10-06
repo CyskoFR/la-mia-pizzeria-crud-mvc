@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Home static";
+
+    List<string[]> pizzas = new()
+    {
+        new[] {"Margherita", "Pomodoro, Mozzarella", "https://www.melarossa.it/wp-content/uploads/2021/02/ricetta-pizza-margherita.jpg?x58780", "4,99"},
+        new[] {"Diavola", "Pomodoro, Mozzarella, Salame pizzante", "https://www.negroni.com/sites/negroni.com/files/styles/scale__1440_x_1440_/public/pizza_rustica.jpg?itok=Lbp_jtZW", "5,99"},
+        new[] {"Olive", "Pomodoro, Mozzarella, Olive nere, Olive verdi", "https://blog.giallozafferano.it/dolcissimastefy/wp-content/uploads/2018/04/IMG_0480-2.jpg", "5,50"},
+        new[] {"4 Stagioni", "Pomodoro, Mozzarella, Funghi, Prosciutto, Olive nere, Carciofi", "https://primochef.it/wp-content/uploads/2020/04/SH_pizza_quattro_stagioni.jpg", "6,99"},
+    };
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Pizzas</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <main>
+        <table>
+            <thead class="d-flex flex-column container">
+                <tr class="row w-100">
+                    <th class="col-3">Name</th>
+                    <th class="col-3">Description</th>
+                    <th class="col-3">Picture</th>
+                    <th class="col-3">Price</th>
+                </tr>
+            </thead>
+            <tbody class="d-flex flex-column container">
+                @foreach (string[] pizza in pizzas)
+                {
+                    <tr class="row w-100 align-items-center">
+                        <td class="col-3">@pizza[0]</td>
+                        <td class="col-3">@pizza[1]</td>
+                        <td class="col-3"><img src=@pizza[2] style='width: 100px !important; height: 100px !important; border-radius: 50%;'></td>
+                        <td class="col-3">@pizza[3]</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
+    <footer>
+        
+    </footer>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
