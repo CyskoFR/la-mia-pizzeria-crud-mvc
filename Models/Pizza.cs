@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace la_mia_pizzeria.Models
 {
@@ -7,7 +8,7 @@ namespace la_mia_pizzeria.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Il campo è obbligatorio")]
-        [StringLength(50, ErrorMessage = "Il nome non può avere più di 25 caratteri")]
+        [StringLength(25, ErrorMessage = "Il nome non può avere più di 25 caratteri")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Il campo è obbligatorio")]
@@ -19,6 +20,10 @@ namespace la_mia_pizzeria.Models
 
         [Required(ErrorMessage = "Il campo è obbligatorio")]
         public double Price { get; set; }
+
+        public int? CategoryId { get; set; }
+
+        public Category? Category { get; set; }
 
         public Pizza()
         {

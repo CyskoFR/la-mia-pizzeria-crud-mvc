@@ -1,7 +1,8 @@
+@using la_mia_pizzeria_crud_mvc.Models
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 
-    @model Pizza
+    @model PizzasCategories
 }
 
 <div class="container">
@@ -10,33 +11,33 @@
             <h1>Modifica Pizza</h1>
         </div>
         <div class="card-body">
-            <form asp-controller="Pizza" asp-route-id="@Model.Id" asp-action="Edit" method="post">
+            <form asp-controller="Pizza" asp-route-id="@Model.Pizza.Id" asp-action="Edit" method="post">
                 @Html.AntiForgeryToken()
 
                 <div class="form-group mb-3">
-                    <label for="Name">Nome*</label>
-                    <input asp-for="Name" type="text" class="form-control">
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <label for="Pizza.Name">Nome*</label>
+                    <input asp-for="Pizza.Name" type="text" class="form-control">
+                    <span asp-validation-for="Pizza.Name" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="Price">Prezzo*</label>
+                    <label for="Pizza.Price">Prezzo*</label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">€</span>
-                        <input asp-for="Price" type="text" class="form-control">
-                        <span asp-validation-for="Price" class="text-danger"></span>
+                        <input asp-for="Pizza.Price" type="text" class="form-control">
+                        <span asp-validation-for="Pizza.Price" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="Description">Descrizione*</label>
-                    <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+                    <label for="Pizza.Description">Descrizione*</label>
+                    <textarea asp-for="Pizza.Description" class="form-control" rows="10"></textarea>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="Picture" class="form-label">Immagine*</label>
-                    <input asp-for="Picture" type="text" class="form-control">
-                    <span asp-validation-for="Picture" class="text-danger"></span>
+                    <label for="Pizza.Picture" class="form-label">Immagine*</label>
+                    <input asp-for="Pizza.Picture" type="text" class="form-control">
+                    <span asp-validation-for="Pizza.Picture" class="text-danger"></span>
                 </div>
 
                 <div>
