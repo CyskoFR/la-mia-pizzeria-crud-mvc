@@ -35,6 +35,43 @@
                 </div>
 
                 <div class="form-group mb-3">
+                    <label for="Pizza.CategoryId">Categoria*</label>
+                    <select asp-for="Pizza.CategoryId" class="form-select" aria-label="Default select example">
+                        @foreach (Category category in Model.Categories)
+                        {
+                            @if (Model.Pizza.CategoryId == category.Id)
+                            {
+                                <option value="@category.Id" selected>@category.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@category.Id">@category.Name</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="Pizza.CategoryId"></span>
+                </div>
+
+                @*Ingredients SELECT*@
+                <div class="form-group mb-3">
+                    <label for="Ingredients.Id">Ingredienti*</label>
+                    <select multiple="multiple" asp-for="SelectedIngredientsId" class="form-select" aria-label="Default select example">
+                        @foreach (Ingredient ingredient in Model.Ingredients)
+                        {
+                            if(Model.Pizza.Ingredients.Contains(ingredient))
+                            {
+                                <option selected value="@ingredient.Id">@ingredient.Name</option>
+                            }
+                            else 
+                            {
+                                <option value="@ingredient.Id">@ingredient.Name</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="@Model.Ingredients"></span>
+                </div>
+
+                <div class="form-group mb-3">
                     <label for="Pizza.Picture" class="form-label">Immagine*</label>
                     <input asp-for="Pizza.Picture" type="text" class="form-control">
                     <span asp-validation-for="Pizza.Picture" class="text-danger"></span>

@@ -2,20 +2,19 @@
 
 namespace la_mia_pizzeria_crud_mvc.Models
 {
-    public class PizzasCategories
+    public class PizzaCommon
     {
         public Pizza Pizza { get; set; }
 
-        public List<Category> Categories {get; set; }
-        public List<Ingredient> Ingredients { get; set; }
-        public List<int> SelectedIngredientsId { get; set; }
+        public List<Category> Categories { get; set; }
 
-        public PizzasCategories()
+        public List<Ingredient> Ingredients { get; set; }
+
+        public PizzaCommon()
         {
             Pizza = new Pizza();
             Categories = new List<Category>();
             Ingredients = new List<Ingredient>();
-            SelectedIngredientsId = new List<int>();
         }
     }
 }

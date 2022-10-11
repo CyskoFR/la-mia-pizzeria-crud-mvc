@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using la_mia_pizzeria_crud_mvc.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace la_mia_pizzeria.Models
@@ -25,18 +26,21 @@ namespace la_mia_pizzeria.Models
 
         public Category? Category { get; set; }
 
+        public List<Ingredient>? Ingredients { get; set; }
+
         public Pizza()
         {
         
         }
 
-        public Pizza(int id, string name, string description, string picture, double price)
+        public Pizza(int id, string name, string description, string picture, double price, int categoryId)
         {
             Id = id;
             Name = name;
             Description = description;
             Picture = picture;
             Price = price;
+            CategoryId = categoryId;
         }
     }
 }

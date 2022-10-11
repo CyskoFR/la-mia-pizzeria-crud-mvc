@@ -7,8 +7,10 @@ namespace la_mia_pizzeria.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public Category()
+        public Category(int id, string name)
         {
+            Id = id;
+            Name = name;
         }
 
         public List<Pizza> Pizzas { get; set; }
