@@ -17,14 +17,14 @@ namespace la_mia_pizzeria.Controllers
 
         public ActionResult Index()
         {
-            List<Pizza> pizzas = context.Pizzas.Include("Category").ToList();
+            List<Pizza> pizzas = context.Pizzas.Include("Category").Include("Ingredients").ToList();
 
             return View("Index", pizzas);
         }
 
         public ActionResult Show(int id)
         {
-            Pizza pizzaFound = context.Pizzas.Include("Category").Where(pizza => pizza.Id == id).FirstOrDefault();
+            Pizza pizzaFound = context.Pizzas.Include("Category").Include("Ingredients").Where(pizza => pizza.Id == id).FirstOrDefault();
 
             if (pizzaFound == null)
             {
@@ -81,7 +81,7 @@ namespace la_mia_pizzeria.Controllers
 
         public ActionResult Edit(int id)
         {
-            Pizza pizzaEdit = context.Pizzas.Include("Category").Include("Ingredients").Where(pizza => pizza.Id == id).First();
+            Pizza pizzaEdit = context.Pizzas.Include("Category").Include("Ingredients").Where(pizza => pizza.Id == id).FirstOrDefault();
 
             PizzasCategories pizzasCategories = new PizzasCategories();
 
@@ -103,7 +103,7 @@ namespace la_mia_pizzeria.Controllers
                 return View("Edit", formData);
             }
 
-            Pizza pizzaEdit = context.Pizzas.Where(pizza => pizza.Id == id).Include("Ingredients").First();
+            Pizza pizzaEdit = context.Pizzas.Where(pizza => pizza.Id == id).Include("Ingredients").FirstOrDefault();
 
             pizzaEdit.Name = formData.Pizza.Name;
             pizzaEdit.Description = formData.Pizza.Description;
@@ -126,10 +126,16 @@ namespace la_mia_pizzeria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            Pizza pizzaEdit = context.Pizzas.Where(pizza => pizza.Id == id).First();
+            Pizza pizza = context.Pizzas.Where(pizza => pizza.Id == id).First();
 
-            context.Pizzas.Remove(pizzaEdit);
+            if (pizza == null)
+            {
+                return View("Error");
+            }
+
+            context.Pizzas.Remove(pizza);
             context.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }

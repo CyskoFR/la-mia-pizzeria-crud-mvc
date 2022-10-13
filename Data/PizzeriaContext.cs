@@ -1,14 +1,24 @@
 using la_mia_pizzeria.Models;
 using la_mia_pizzeria_crud_mvc.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-public class PizzeriaContext : DbContext
+public class PizzeriaContext : IdentityDbContext<IdentityUser>
 {
-    public DbSet<Pizza> Pizzas { get; set; }
+    public PizzeriaContext()
+    {
 
-    public DbSet<Category> Categories { get; set; }
+    }
+    public PizzeriaContext(DbContextOptions<PizzeriaContext> options)
+    : base(options)
+    {
+    }
+    public DbSet<Pizza>? Pizzas { get; set; }
 
-    public DbSet<Ingredient> Ingredients { get; set; }
+    public DbSet<Category>? Categories { get; set; }
+
+    public DbSet<Ingredient>? Ingredients { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
